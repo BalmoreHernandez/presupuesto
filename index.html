@@ -1098,7 +1098,7 @@ const ACT = {
   leadAgain: () => { S.lead = { sent: false, name: "" }; save(); render(); },
   sampleStart: () => { const c = $("#wCurrency"); S.currency = c ? c.value : S.currency || guessCurrency(); loadData(sampleData(), true); S.tab = "inicio"; UI.month = thisMonth(); save(); render(); window.scrollTo(0, 0); },
   sampleExit: () => { if (!confirm(t("sampleConfirm"))) return; clearData(); save(); render(); window.scrollTo(0, 0); },
-  reset: () => { if (!confirm(t("resetConfirm"))) return; clearData(); S.tab = "inicio"; S.lastBackup = ""; save(); render(); window.scrollTo(0, 0); toast(t("resetDone")); }
+  reset: () => { if (!confirm(t("resetConfirm"))) return; clearData(); S.currency = ""; S.tab = "inicio"; S.lastBackup = ""; save(); render(); window.scrollTo(0, 0); toast(t("resetDone")); }
 };
 document.addEventListener("click", e => { const el = e.target.closest("[data-act]"); if (el && ACT[el.dataset.act]) { if (el.tagName === "BUTTON" && el.type !== "submit") e.preventDefault(); ACT[el.dataset.act](el, e); } });
 document.addEventListener("submit", e => {
@@ -1116,7 +1116,7 @@ document.addEventListener("change", e => {
   else if (id === "setLang") { S.lang = e.target.value; save(); render(); }
   else if (id === "sAccType") $("#sOpenL").textContent = DEBT_TYPES.includes(e.target.value) ? t("owed") : t("opening");
   else if (/^w(Cash|Bank|Card)$/.test(id)) $("#" + id + "F").hidden = !e.target.checked;
-  else if (id === "importFile" && e.target.files[0]) { const r = new FileReader(); r.onload = () => importText(String(r.result)); r.readAsText(e.target.files[0]); }
+  else if (id === "importFile" && e.target.files[0]) { const f = e.target.files[0], r = new FileReader(); e.target.value = ""; r.onload = () => importText(String(r.result)); r.readAsText(f); }
 });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && UI.sheet) closeSheet(); });
 render();
