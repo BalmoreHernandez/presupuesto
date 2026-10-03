@@ -1,0 +1,18 @@
+{
+  "name": "Presupuesto · Balmore Hernandez",
+  "short_name": "Presupuesto",
+  "description": "Master your body, mind and money. Tu presupuesto personal y familiar, simple y privado.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "es",
+  "icons": [
+    { "src": "icon-192.png?v=g8b", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png?v=g8b", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png?v=g8b", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "theme_color": "#0E1A2E",
+  "background_color": "#F6F1E9"
+}
