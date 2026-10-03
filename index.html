@@ -75,6 +75,8 @@ h3{font-family:var(--fh);font-weight:800;font-size:17px;line-height:1.2;letter-s
 .link{border:0;background:none;color:var(--accent);font-family:var(--fh);font-weight:800;font-size:13.5px;padding:6px 0;text-decoration:none;white-space:nowrap}
 .neg{color:var(--err)!important}
 .cols{display:block}
+.headr{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.card-h>svg{width:26px;height:26px;color:var(--accent);flex:none}
 
 /* ---- botones ---- */
 .btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;gap:8px;padding:8px 18px;min-height:52px;border:2px solid var(--accent);border-radius:16px;
@@ -614,7 +616,7 @@ function sampleData() {
   const tx = [], budgets = [];
   for (let i = 5; i >= 0; i--) {
     const m = shiftMonth(tm, -i), cur0 = m === tm, D = d => `${m}-${pad(cur0 ? Math.min(d, td) : d)}`, k = 5 - i;
-    const add = (id, type, amount, name, d, category, account, extra = {}) => { if (!cur0 || d <= Math.max(td, 2) || ["salary", "housing"].includes(category)) tx.push({ id: `s${k}-${id}`, type, amount, name, date: D(d), category, account, note: "", ...extra }); };
+    const add = (id, type, amount, name, d, category, account, extra = {}) => { tx.push({ id: `s${k}-${id}`, type, amount, name, date: D(d), category, account, note: "", ...extra }); };
     add("sal", "income", 140000, N("Salario", "Salary"), 1, "salary", "a1");
     add("biz", "income", 22000 + k * 1500, N("Ventas por catálogo", "Side business"), 6, "business", "a2");
     add("ren", "expense", 45000, N("Alquiler", "Rent"), 2, "housing", "a1");
@@ -696,7 +698,7 @@ const sampleBanner = () => `<div class="banner" id="sampleBanner"><span><b>${t("
 const monthSwitch = () => `<div class="month" id="monthSw"><button class="arr" data-act="month" data-v="-1" aria-label="${t("prevMonth")}">${I("left")}</button>
   <button class="ml" id="monthLabel" data-act="monthNow" title="${t("thisMonth")}">${monthLabel(UI.month)}</button>
   <button class="arr" data-act="month" data-v="1" aria-label="${t("nextMonth")}">${I("right")}</button></div>`;
-const head = (title, withMonth = true, withAdd = true) => `<div class="head"><h2>${title}</h2><div class="row" style="display:flex;gap:10px;align-items:center">${withMonth ? monthSwitch() : ""}${withAdd ? `<button class="btn headadd" data-act="newTx">${I("plus")}${t("newTx")}</button>` : ""}</div></div>`;
+const head = (title, withMonth = true, withAdd = true) => `<div class="head"><h2>${title}</h2><div class="headr">${withMonth ? monthSwitch() : ""}${withAdd ? `<button class="btn headadd" data-act="newTx">${I("plus")}${t("newTx")}</button>` : ""}</div></div>`;
 const bar = (pct, over) => `<div class="bar${over ? " over" : ""}"><i style="width:${Math.min(100, Math.max(0, pct)).toFixed(1)}%"></i></div>`;
 const emptyBox = (title, text, btn = "") => `<div class="empty">${I("wallet")}<b>${title}</b><p>${text}</p>${btn}</div>`;
 const sign = r => (r.type === "income" ? "+" : r.type === "expense" ? "−" : "");
